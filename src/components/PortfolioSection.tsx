@@ -79,9 +79,11 @@ export function PortfolioSection({
         </RevealBlock>
 
         {/* Nota de transparência das simulações */}
-        <div className="rounded-xl bg-[#FFF8F3] border border-[#F1E6DF] px-4 py-3 mb-10 text-xs text-[#242424]/75 leading-relaxed">
-          {PORTFOLIO_DISCLAIMER}
-        </div>
+        <RevealBlock delay={0.06} y={20}>
+          <div className="rounded-xl bg-[#FFF8F3] border border-[#F1E6DF] px-4 py-3 mb-10 text-xs text-[#242424]/75 leading-relaxed">
+            {PORTFOLIO_DISCLAIMER}
+          </div>
+        </RevealBlock>
 
         {/* Layout zigue-zague horizontal amplo */}
         <div data-testid="portfolio-zigzag" className="space-y-8">
@@ -89,7 +91,11 @@ export function PortfolioSection({
             const isImageRight = index % 2 === 1;
 
             return (
-              <RevealBlock key={item.id} delay={0.04}>
+              <RevealBlock
+                key={`${selectedCategory}-${item.id}`}
+                delay={index === 0 ? 0.04 : 0.08}
+                y={32}
+              >
                 <article
                   className={`group rounded-[24px] border border-[#F1E6DF] overflow-hidden shadow-[0_8px_28px_rgba(36,36,36,0.04)] ${
                     isImageRight ? 'bg-[#FFF8F3]' : 'bg-white'

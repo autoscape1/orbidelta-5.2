@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ArrowRight } from 'lucide-react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { METHODOLOGY_STAGES } from '../data/agencyData';
 import { RevealBlock } from './MotionPrimitives';
 import { ResilientImage } from './ResilientImage';
@@ -10,6 +11,7 @@ interface MethodSectionProps {
 
 export function MethodSection({ onCtaClick }: MethodSectionProps) {
   const [selectedStage, setSelectedStage] = useState<number>(0);
+  const prefersReducedMotion = useReducedMotion();
   const activeStage = METHODOLOGY_STAGES[selectedStage] || METHODOLOGY_STAGES[0];
 
   return (
@@ -35,14 +37,25 @@ export function MethodSection({ onCtaClick }: MethodSectionProps) {
 
         {/* Composição enxuta: 1 visual dinâmico à esquerda + 4 etapas conectadas e resumidas à direita */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-          <RevealBlock className="lg:col-span-5">
+          <RevealBlock className="lg:col-span-5" y={30}>
             <div className="relative h-full min-h-[280px] sm:min-h-[340px] rounded-[20px] overflow-hidden border border-[#F1E6DF] bg-[#242424]">
-              <ResilientImage
-                src={activeStage.image}
-                alt={activeStage.imageAlt}
-                fallbackTitle={`${activeStage.code} — ${activeStage.title}`}
-                className="w-full h-full object-cover transition-opacity duration-300"
-              />
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeStage.code}
+                  initial={prefersReducedMotion ? false : { opacity: 0.35, scale: 1.02 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={prefersReducedMotion ? undefined : { opacity: 0.35 }}
+                  transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                  className="w-full h-full"
+                >
+                  <ResilientImage
+                    src={activeStage.image}
+                    alt={activeStage.imageAlt}
+                    fallbackTitle={`${activeStage.code} — ${activeStage.title}`}
+                    className="w-full h-full object-cover"
+                  />
+                </motion.div>
+              </AnimatePresence>
               <div
                 aria-hidden="true"
                 className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent"
@@ -65,7 +78,8 @@ export function MethodSection({ onCtaClick }: MethodSectionProps) {
               return (
                 <RevealBlock
                   key={stage.number}
-                  delay={index * 0.04}
+                  delay={index * 0.08}
+                  y={28}
                   className="h-full"
                 >
                   <button

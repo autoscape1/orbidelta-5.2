@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
+import { ScrollProgressBar } from './MotionPrimitives';
 
 interface HeaderProps {
   onCtaClick: () => void;
@@ -26,7 +27,7 @@ export function Header({ onCtaClick }: HeaderProps) {
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-white border-b border-[#F1E6DF]">
+    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-sm border-b border-[#F1E6DF]">
       <div className="max-w-[1200px] mx-auto px-6 h-[68px] flex items-center justify-between gap-8">
         <a
           href="#inicio"
@@ -102,6 +103,7 @@ export function Header({ onCtaClick }: HeaderProps) {
           </button>
         </div>
       )}
+      <ScrollProgressBar />
     </header>
   );
 }

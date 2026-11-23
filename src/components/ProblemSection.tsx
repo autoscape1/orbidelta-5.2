@@ -1,6 +1,6 @@
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import { PROBLEM_JOURNEY_STAGES } from '../data/agencyData';
-import { RevealBlock } from './MotionPrimitives';
+import { RevealBlock, RevealLine } from './MotionPrimitives';
 import { ResilientImage } from './ResilientImage';
 
 interface ProblemSectionProps {
@@ -34,8 +34,8 @@ export function ProblemSection({ onCtaClick }: ProblemSectionProps) {
         {/* Jornada horizontal ilustrada do consumidor */}
         <div className="relative" data-testid="problem-journey">
           {/* Trilho conector horizontal no desktop */}
-          <div
-            aria-hidden="true"
+          <RevealLine
+            delay={0.18}
             className="hidden lg:block absolute top-[128px] left-14 right-14 h-[2px] bg-[#E53935]/20 z-0"
           />
 
@@ -45,7 +45,8 @@ export function ProblemSection({ onCtaClick }: ProblemSectionProps) {
               return (
                 <RevealBlock
                   key={item.id}
-                  delay={index * 0.06}
+                  delay={index * 0.1}
+                  y={32}
                   className={isStaggered ? 'lg:mt-6' : ''}
                 >
                   <article className="group h-full bg-white rounded-[20px] border border-[#F1E6DF] overflow-hidden shadow-[0_6px_24px_rgba(36,36,36,0.04)] hover:border-[#E53935]/45 transition-all duration-200 flex flex-col">

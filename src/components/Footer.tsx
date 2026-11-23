@@ -1,9 +1,10 @@
 import { WHATSAPP_CONTACT } from '../data/agencyData';
+import { RevealBlock } from './MotionPrimitives';
 
 export function Footer() {
   return (
     <footer className="bg-[#242424] text-white py-12">
-      <div className="max-w-[1200px] mx-auto px-6">
+      <RevealBlock y={20} className="max-w-[1200px] mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pb-8 border-b border-white/15 items-start">
           <div className="md:col-span-5">
             <a
@@ -85,7 +86,7 @@ export function Footer() {
           </p>
           <p>© 2026 Orbidelta. Todos os direitos reservados.</p>
         </div>
-      </div>
+      </RevealBlock>
     </footer>
   );
 }

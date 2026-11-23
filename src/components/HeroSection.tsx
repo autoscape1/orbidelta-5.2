@@ -1,6 +1,8 @@
+import { useRef } from 'react';
 import { ArrowRight, ShoppingBag, TrendingUp } from 'lucide-react';
+import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
 import { HERO_DEMO_CARDS } from '../data/agencyData';
-import { AnimatedMetric } from './MotionPrimitives';
+import { AnimatedMetric, RevealBlock } from './MotionPrimitives';
 import { ResilientImage } from './ResilientImage';
 
 interface HeroSectionProps {
@@ -12,55 +14,76 @@ export function HeroSection({
   onPrimaryCtaClick,
   onMethodologyCtaClick,
 }: HeroSectionProps) {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const prefersReducedMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end start'],
+  });
+  const backdropY = useTransform(scrollYProgress, [0, 1], [0, 24]);
+
   return (
-    <section id="inicio" className="bg-white pt-8 pb-14 lg:pt-12 lg:pb-20">
+    <section
+      ref={sectionRef}
+      id="inicio"
+      className="bg-white pt-8 pb-14 lg:pt-12 lg:pb-20 overflow-x-clip"
+    >
       <div className="max-w-[1200px] mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-stretch">
           <div className="lg:col-span-6 flex flex-col justify-center">
-            <p className="text-xs sm:text-sm font-semibold text-[#E53935] tracking-wide mb-3">
-              Marketing de performance para restaurantes
-            </p>
+            <RevealBlock immediate delay={0} y={18}>
+              <p className="text-xs sm:text-sm font-semibold text-[#E53935] tracking-wide mb-3">
+                Marketing de performance para restaurantes
+              </p>
+            </RevealBlock>
 
-            <h1
-              className="font-display font-extrabold text-[#242424] tracking-tight leading-[1.1] mb-5"
-              style={{
-                fontSize: 'clamp(2.25rem, 4vw, 3.5rem)',
-                textWrap: 'balance',
-              }}
-            >
-              Chega de somente curtidas. Seu restaurante precisa de vendas.
-            </h1>
-
-            <p className="text-base md:text-lg text-[#242424]/85 leading-relaxed max-w-[54ch] mb-7">
-              Estruturamos o marketing digital do seu restaurante para atrair
-              clientes, valorizar seus produtos e transformar interesse em
-              pedidos.
-            </p>
-
-            <div className="flex flex-col sm:flex-row sm:items-center gap-3.5">
-              <button
-                type="button"
-                onClick={onPrimaryCtaClick}
-                className="inline-flex items-center justify-center gap-2.5 px-7 py-4 text-sm md:text-base font-semibold text-white bg-[#E53935] hover:bg-[#B91F24] rounded-xl transition-all duration-150 hover:-translate-y-0.5 whitespace-nowrap shrink-0 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#242424]"
+            <RevealBlock immediate delay={0.07} y={24}>
+              <h1
+                className="font-display font-extrabold text-[#242424] tracking-tight leading-[1.1] mb-5"
+                style={{
+                  fontSize: 'clamp(2.25rem, 4vw, 3.5rem)',
+                  textWrap: 'balance',
+                }}
               >
-                <span>Quero vender mais</span>
-                <ArrowRight className="w-4 h-4" aria-hidden="true" />
-              </button>
+                Chega de somente curtidas. Seu restaurante precisa de vendas.
+              </h1>
+            </RevealBlock>
 
-              <button
-                type="button"
-                onClick={onMethodologyCtaClick}
-                className="inline-flex items-center justify-center px-6 py-4 text-sm md:text-base font-semibold text-[#242424] bg-[#FFF8F3] hover:bg-[#f7ece4] border border-[#F1E6DF] rounded-xl transition-colors duration-150 whitespace-nowrap shrink-0 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E53935]"
-              >
-                Conheça nossa metodologia
-              </button>
-            </div>
+            <RevealBlock immediate delay={0.14} y={24}>
+              <p className="text-base md:text-lg text-[#242424]/85 leading-relaxed max-w-[54ch] mb-7">
+                Estruturamos o marketing digital do seu restaurante para atrair
+                clientes, valorizar seus produtos e transformar interesse em
+                pedidos.
+              </p>
+            </RevealBlock>
+
+            <RevealBlock immediate delay={0.21} y={20}>
+              <div className="flex flex-col sm:flex-row sm:items-center gap-3.5">
+                <button
+                  type="button"
+                  onClick={onPrimaryCtaClick}
+                  className="inline-flex items-center justify-center gap-2.5 px-7 py-4 text-sm md:text-base font-semibold text-white bg-[#E53935] hover:bg-[#B91F24] rounded-xl transition-all duration-150 hover:-translate-y-0.5 whitespace-nowrap shrink-0 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#242424]"
+                >
+                  <span>Quero vender mais</span>
+                  <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                </button>
+
+                <button
+                  type="button"
+                  onClick={onMethodologyCtaClick}
+                  className="inline-flex items-center justify-center px-6 py-4 text-sm md:text-base font-semibold text-[#242424] bg-[#FFF8F3] hover:bg-[#f7ece4] border border-[#F1E6DF] rounded-xl transition-colors duration-150 whitespace-nowrap shrink-0 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E53935]"
+                >
+                  Conheça nossa metodologia
+                </button>
+              </div>
+            </RevealBlock>
           </div>
 
-          <div className="lg:col-span-6 flex flex-col">
+          <RevealBlock immediate delay={0.14} y={28} className="lg:col-span-6 flex flex-col">
             <div className="relative flex-1 min-h-[340px] lg:min-h-[460px]">
-              <div
+              <motion.div
                 aria-hidden="true"
+                style={prefersReducedMotion ? undefined : { y: backdropY }}
                 className="hidden sm:block absolute -bottom-3 -right-3 w-full h-full rounded-[20px] bg-[#E53935]"
               />
               <div className="relative w-full h-full overflow-hidden rounded-[20px] border border-[#F1E6DF] bg-[#FFF8F3]">
@@ -133,7 +156,7 @@ export function HeroSection({
               Indicadores demonstrativos de apresentação visual (simulações de
               layout, não representam resultados garantidos).
             </p>
-          </div>
+          </RevealBlock>
         </div>
       </div>
     </section>

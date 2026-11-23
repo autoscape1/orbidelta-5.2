@@ -96,48 +96,54 @@ export function EntryOfferSection({ onCtaClick }: EntryOfferSectionProps) {
                 {FIRST_30_DAYS_TIMELINE.map((milestone, index) => {
                   const isActive = activeWeek === index;
                   return (
-                    <button
+                    <RevealBlock
                       key={milestone.days}
-                      type="button"
-                      aria-pressed={isActive}
-                      onClick={() => setActiveWeek(index)}
-                      className={`text-left rounded-xl p-4 border transition-colors duration-150 cursor-pointer focus-visible:outline-2 focus-visible:outline-white ${
-                        isActive
-                          ? 'bg-white text-[#242424] border-white'
-                          : 'bg-white/5 text-white border-white/15 hover:border-white/35'
-                      }`}
+                      delay={0.08 + index * 0.07}
+                      y={20}
+                      className="h-full"
                     >
-                      <div className="flex items-center justify-between gap-2 mb-1.5">
-                        <span
-                          className={`font-display text-xs font-bold tabular-nums ${
-                            isActive ? 'text-[#E53935]' : 'text-[#E6AE45]'
-                          }`}
-                        >
-                          {milestone.days}
-                        </span>
-                        <span
-                          className={`text-[11px] font-semibold tabular-nums ${
-                            isActive ? 'text-[#299B65]' : 'text-white/55'
-                          }`}
-                        >
-                          Semana 0{index + 1}
-                        </span>
-                      </div>
-                      <h3
-                        className={`font-display text-sm font-bold mb-1 ${
-                          isActive ? 'text-[#242424]' : 'text-white'
+                      <button
+                        type="button"
+                        aria-pressed={isActive}
+                        onClick={() => setActiveWeek(index)}
+                        className={`w-full h-full text-left rounded-xl p-4 border transition-colors duration-150 cursor-pointer focus-visible:outline-2 focus-visible:outline-white ${
+                          isActive
+                            ? 'bg-white text-[#242424] border-white'
+                            : 'bg-white/5 text-white border-white/15 hover:border-white/35'
                         }`}
                       >
-                        {milestone.title}
-                      </h3>
-                      <p
-                        className={`text-xs leading-relaxed ${
-                          isActive ? 'text-[#242424]/75' : 'text-white/75'
-                        }`}
-                      >
-                        {milestone.summary}
-                      </p>
-                    </button>
+                        <div className="flex items-center justify-between gap-2 mb-1.5">
+                          <span
+                            className={`font-display text-xs font-bold tabular-nums ${
+                              isActive ? 'text-[#E53935]' : 'text-[#E6AE45]'
+                            }`}
+                          >
+                            {milestone.days}
+                          </span>
+                          <span
+                            className={`text-[11px] font-semibold tabular-nums ${
+                              isActive ? 'text-[#299B65]' : 'text-white/55'
+                            }`}
+                          >
+                            Semana 0{index + 1}
+                          </span>
+                        </div>
+                        <h3
+                          className={`font-display text-sm font-bold mb-1 ${
+                            isActive ? 'text-[#242424]' : 'text-white'
+                          }`}
+                        >
+                          {milestone.title}
+                        </h3>
+                        <p
+                          className={`text-xs leading-relaxed ${
+                            isActive ? 'text-[#242424]/75' : 'text-white/75'
+                          }`}
+                        >
+                          {milestone.summary}
+                        </p>
+                      </button>
+                    </RevealBlock>
                   );
                 })}
               </div>
@@ -170,7 +176,7 @@ export function EntryOfferSection({ onCtaClick }: EntryOfferSectionProps) {
           </RevealBlock>
 
           <RevealBlock
-            delay={0.05}
+            delay={0.1}
             className="lg:col-span-6 bg-white rounded-[20px] border border-[#F1E6DF] p-6 md:p-7 flex flex-col justify-between"
           >
             <div>
@@ -241,8 +247,10 @@ export function EntryOfferSection({ onCtaClick }: EntryOfferSectionProps) {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {OFFER_CONDITIONS.map((condition, idx) => (
-              <div
+              <RevealBlock
                 key={condition}
+                delay={idx * 0.07}
+                y={20}
                 className="rounded-xl bg-[#FFF8F3] border border-[#F1E6DF] p-4"
               >
                 <span className="font-display text-xs font-bold text-[#E53935] tabular-nums block mb-1.5">
@@ -251,7 +259,7 @@ export function EntryOfferSection({ onCtaClick }: EntryOfferSectionProps) {
                 <p className="text-xs sm:text-sm text-[#242424]/80 leading-relaxed">
                   {condition}
                 </p>
-              </div>
+              </RevealBlock>
             ))}
           </div>
         </RevealBlock>

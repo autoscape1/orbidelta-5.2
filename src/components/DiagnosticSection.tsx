@@ -6,6 +6,7 @@ import {
   QuickContactErrors,
   validateQuickContact,
 } from '../utils/diagnostic';
+import { RevealBlock } from './MotionPrimitives';
 import { ResilientImage } from './ResilientImage';
 
 const SEGMENTS: RestaurantSegment[] = [
@@ -56,7 +57,7 @@ export function DiagnosticSection({
     <section id="contato" className="bg-[#E53935] text-white py-16 lg:py-22">
       <div className="max-w-[1200px] mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-6">
+          <RevealBlock className="lg:col-span-6" y={28}>
             <p className="text-sm font-semibold text-white/90 mb-3">
               07. Diagnóstico · Orbidelta
             </p>
@@ -91,9 +92,13 @@ export function DiagnosticSection({
             <p className="text-sm font-semibold text-white tabular-nums">
               WhatsApp: {WHATSAPP_CONTACT.display}
             </p>
-          </div>
+          </RevealBlock>
 
-          <div className="lg:col-span-6 bg-white text-[#242424] rounded-[20px] overflow-hidden border border-[#F1E6DF]">
+          <RevealBlock
+            delay={0.1}
+            y={32}
+            className="lg:col-span-6 bg-white text-[#242424] rounded-[20px] overflow-hidden border border-[#F1E6DF]"
+          >
             <div className="h-44 sm:h-48 w-full overflow-hidden border-b border-[#F1E6DF] bg-[#FFF8F3]">
               <ResilientImage
                 src="/src/assets/images/portfolio_pizza_1794880718942.jpg"
@@ -263,7 +268,7 @@ export function DiagnosticSection({
                 </form>
               )}
             </div>
-          </div>
+          </RevealBlock>
         </div>
       </div>
     </section>
