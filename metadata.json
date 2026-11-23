@@ -1,0 +1,8 @@
+{
+  "name": "Orbidelta 5.2",
+  "description": "Agência 360° especializada em food service. Conectamos estratégia, criatividade, produção audiovisual e performance para negócios gastronômicos crescerem.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
